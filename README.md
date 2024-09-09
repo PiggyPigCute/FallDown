@@ -33,7 +33,7 @@ This is another example of program that multiply the two inputs.
 
 ## Python Executor
 
-The `exe.py` fil is a Fall Dawn executor, to use it, type in the console
+The `exe.py` file is a Fall Dawn executor, to use it, type in the console
 
 ```
 py exe.py <PATH>

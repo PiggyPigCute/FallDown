@@ -1,7 +1,7 @@
 # FallDown
 
-**Fall Down** is an esolang using "gravity", the main idea is to use balls that can fall, roll, duplicate themselves, mix with other balls, store a value...
-A Fall Down program is executed tick per tick, each teak all the balls move at the same time. Each ball stores a value (of 0 at beggining) that increase by 1 each tick where the ball is falling.
+**FallDown** is an esolang using "gravity", the main idea is to use balls that can fall, roll, duplicate themselves, mix with other balls, store a value...
+A FallDown program is executed tick per tick, each tick, all the balls move at the same time. Each ball stores a value (of 0 at beggining) that increase by 1 each tick if the ball is falling.
 
 ```
 .

@@ -183,9 +183,9 @@ while len(dots) > 0:
             forward(d,'?',tick)
         if map[d[0]][d[1]] == '!':
             awnser = input("! ")
-            if len(awnser) > 1:
+            if len(awnser) != 1:
                 raise FallDownInput(awnser,1)
-            d[3] = int(awnser)
+            d[3] = ord(awnser)
             forward(d,'!',tick)
         elif map[d[0]][d[1]] == '#':
             print(d[3],end='')

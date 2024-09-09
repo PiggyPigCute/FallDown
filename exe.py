@@ -4,15 +4,16 @@ from time import sleep
 class FallDownExplosion(Exception):
     def __init__(self, dot, tick, prefix = ""):
         super().__init__("💥" + prefix + " at position (" + str(dot[0]) + "," + str(dot[1]) + ") at tick " + str(tick) + " with direction " + "× ↓ ← → ↑"[d[2]])
-class FallDownInput(Exception):
+class FallDownInput(Exception,id):
     def __init__(self, awnser) -> None:
-        super().__init__("💀 input values must be positive integers, but awnsered " + awnser)
+        text = ("?) must be positive integers","!) must be a single character")[id]
+        super().__init__("💀 input values with ("+text+", but awnsered " + awnser)
 class FallDownUnexpected(Exception):
     def __init__(self, message) -> None:
         super().__init__("🐷 "+message)
 
 SOLID_CHARS = "\\/-$|"
-FILLED_CHARS = "\\/-$|?#§:~+"
+FILLED_CHARS = "\\/-$|?!#§:~+"
 
 def forward(dot,op,tick,message=" after crossing operand "):
     if dot[2] == 2:
@@ -177,9 +178,15 @@ while len(dots) > 0:
             awnser = input("? ")
             for char in awnser:
                 if not char in "0123456789":
-                    raise FallDownInput(awnser)
+                    raise FallDownInput(awnser,0)
             d[3] = int(awnser)
             forward(d,'?',tick)
+        if map[d[0]][d[1]] == '!':
+            awnser = input("! ")
+            if len(awnser) > 1:
+                raise FallDownInput(awnser,1)
+            d[3] = int(awnser)
+            forward(d,'!',tick)
         elif map[d[0]][d[1]] == '#':
             print(d[3],end='')
             forward(d,'#',tick)

@@ -1,0 +1,95 @@
+(This documentation isn’t definitive)
+
+
+## Move
+
+### Void ()
+↓	→	←	•
+•	•	•	↑
+
+### Roads (-)
+→•	•←
+-	 -
+
+### Slopes (\/)  ←
+↓	→	•←	/•	//
+\•	\•	 \	↑	•
+
+### Slopes with roads
+↓•	→•	/-
+\-	\-	↑•	
+
+### Springs ($)
+•	•	•	$
+↓	→	←	↑
+$	$	$	•
+
+
+## Actions
+
+### Portal (:)
+if move to ":" from side
+|  ←:→
+│  The two new balls have the value of the old ball
+if move to ":" from up or down, there is an explosion (aka, an error)
+
+### Water (~)
+if move above of "~" from side
+| before:
+|   →
+|   ~
+|
+| after (if value ≠ 0):
+|    → 
+|   ~   and deacrease value of 1
+| after (if value = 0):
+|   ~
+|   →
+if move into a "~", just pass through
+
+### Mixer (+)
+if 1, 2 or 3 balls arrive in a mixer at the SAME tick, 
+| All the balls are combined into a new ball (whose the value is the sum of the values of the previous balls)
+| Then the new ball with thrown toward one of the four sides:
+|  ↑
+| ←+→
+|  ↓
+| The exit side need to verify two conditions:
+| • the place need to be free space
+|  (if there is on of these chars "\/-$|?#§:~+" juste after the "+", another direction is choosed)
+| • if ther isn’t any ball that entered into the "+" by this side
+| If there isn’t any side that verify the two conditions, there in an explosion (aka, an error)
+| If there are several valid sides, then it’s in the order ↓←→↑ among the valid sides
+| 
+| Examples:
+| 
+| →+  »  +→
+| ---   ---
+|
+| →+  »  +
+| - -   -↓-
+|
+|        ↑
+| →+← »  +
+| ---   ---
+
+### Questions (?!)
+If a ball move into a "?", a value (positive integer) is asked to the user, then the ball pass through and the value became the awnser.
+Same for "!", but the value asked is a single char (converted according to its ascii value)
+
+### Pictures (#§)
+If a ball move into a "#", its value is printed and the ball go through
+Same for "§", but the value printed is char whose the ascii code is the value of the ball
+
+## "Go through"
+When a ball "go through" an operand, that means that the ball go forward according to its direction and doesn’t change its direction.
+In addition, if there is one of these chars "\/-$|?#§:~+" at the next place, there is an explosion (aka, an error)
+
+## Order of actions during a tick:
+During a tick:
+• Each ball moves according to the "Move" section
+• Each ball does the actions indepandantly (sorted by lexicographic order of the coordinates):
+  • do the action of a "go through" operand ("?!#§:~")
+  • do the action of water "~" if the ball is over water
+• Then the mixers "+" mix the balls
+• Finally, if there is to balls on the same place its disapear, and if a ball is out of the frame it disapears

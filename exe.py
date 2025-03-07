@@ -4,9 +4,9 @@ from time import sleep
 class FallDownExplosion(Exception):
     def __init__(self, dot, tick, prefix = ""):
         super().__init__("💥" + prefix + " at position (" + str(dot[0]) + "," + str(dot[1]) + ") at tick " + str(tick) + " with direction " + "× ↓ ← → ↑"[d[2]])
-class FallDownInput(Exception,id):
-    def __init__(self, awnser) -> None:
-        text = ("?) must be positive integers","!) must be a single character")[id]
+class FallDownInput(Exception):
+    def __init__(self, awnser, i) -> None:
+        text = ("?) must be positive integers","!) must be a single character")[i]
         super().__init__("💀 input values with ("+text+", but awnsered " + awnser)
 class FallDownUnexpected(Exception):
     def __init__(self, message) -> None:

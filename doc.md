@@ -1,46 +1,77 @@
-(This documentation isn’t definitive)
+**(This documentation isn't definitive)**
 
+At each tick, each ball have this information :
+• Coordinates (two integers to know its place in the file)
+• Value (always a positive integer)
+• Direction (one of the four directions ↓ ← → ↑)
 
 ## Move
 
+This section only matters of characters `-/\$|`
+
+### Direction ↓
+
+If the direction of a ball is ↓
+
+```
+↓ » 
+    ↓
+
+↓  » 
+\    \→
+
+↓  »  →
+\-   \-
+
+    ↑
+↓ » 
+$
+
+```
+
 ### Void ()
+
 ↓	→	←	•
 •	•	•	↑
 
 ### Roads (-)
+
 →•	•←
--	 -
 
 ### Slopes (\/)  ←
+
 ↓	→	•←	/•	//
 \•	\•	 \	↑	•
 
 ### Slopes with roads
+
 ↓•	→•	/-
-\-	\-	↑•	
+\-	\-	↑•
 
 ### Springs ($)
+
 •	•	•	$
 ↓	→	←	↑
 $	$	$	•
 
-
 ## Actions
 
 ### Portal (:)
+
 if move to ":" from side
 |  ←:→
 │  The two new balls have the value of the old ball
 if move to ":" from up or down, there is an explosion (aka, an error)
 
 ### Water (~)
+
 if move above of "~" from side
 | before:
 |   →
 |   ~
 |
 | after (if value ≠ 0):
-|    → 
+|    →
 |   ~   and deacrease value of 1
 | after (if value = 0):
 |   ~
@@ -48,7 +79,8 @@ if move above of "~" from side
 if move into a "~", just pass through
 
 ### Mixer (+)
-if 1, 2 or 3 balls arrive in a mixer at the SAME tick, 
+
+if 1, 2 or 3 balls arrive in a mixer at the SAME tick,
 | All the balls are combined into a new ball (whose the value is the sum of the values of the previous balls)
 | Then the new ball with thrown toward one of the four sides:
 |  ↑
@@ -57,12 +89,12 @@ if 1, 2 or 3 balls arrive in a mixer at the SAME tick,
 | The exit side need to verify two conditions:
 | • the place need to be free space
 |  (if there is on of these chars "\/-$|?#§:~+" juste after the "+", another direction is choosed)
-| • if ther isn’t any ball that entered into the "+" by this side
-| If there isn’t any side that verify the two conditions, there in an explosion (aka, an error)
-| If there are several valid sides, then it’s in the order ↓←→↑ among the valid sides
-| 
+| • if ther isn't any ball that entered into the "+" by this side
+| If there isn't any side that verify the two conditions, there in an explosion (aka, an error)
+| If there are several valid sides, then it's in the order ↓←→↑ among the valid sides
+|
 | Examples:
-| 
+|
 | →+  »  +→
 | ---   ---
 |
@@ -74,18 +106,22 @@ if 1, 2 or 3 balls arrive in a mixer at the SAME tick,
 | ---   ---
 
 ### Questions (?!)
+
 If a ball move into a "?", a value (positive integer) is asked to the user, then the ball pass through and the value became the awnser.
 Same for "!", but the value asked is a single char (converted according to its ascii value)
 
 ### Pictures (#§)
+
 If a ball move into a "#", its value is printed and the ball go through
 Same for "§", but the value printed is char whose the ascii code is the value of the ball
 
 ## "Go through"
-When a ball "go through" an operand, that means that the ball go forward according to its direction and doesn’t change its direction.
+
+When a ball "go through" an operand, that means that the ball go forward according to its direction and doesn't change its direction.
 In addition, if there is one of these chars "\/-$|?#§:~+" at the next place, there is an explosion (aka, an error)
 
 ## Order of actions during a tick:
+
 During a tick:
 • Each ball moves according to the "Move" section
 • Each ball does the actions indepandantly (sorted by lexicographic order of the coordinates):
